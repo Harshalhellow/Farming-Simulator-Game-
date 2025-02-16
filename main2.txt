@@ -1,0 +1,80 @@
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "Gameworld.cpp"
+#include "Gametile.cpp"
+#include "Gameworld.h"
+#include "Menu.h"
+#include "Menu.cpp"
+using namespace sf;
+
+int main(){
+
+    // Window and Menu Objects 
+    RenderWindow window(sf::VideoMode(400, 400), "OOP Project");
+
+    // Player Sprite
+    sf::Texture texture;
+    if(!texture.loadFromFile("Assets/FinishedFiles/Player.png")){
+        return 0;
+    };
+                                        
+    sf::Sprite Player;
+    Player.setTexture(texture);
+    Player.setPosition(sf::Vector2f(300,50));
+
+    // make the game object with tiles
+    GameWorld gameWorld = GameWorld();
+    gameWorld.setUpTiles();
+
+    // running game window
+    while (window.isOpen()){
+        // create event, if event is window closed, close window
+        sf::Event event;
+        
+        
+        // check for keyboard input
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            Player.move(sf::Vector2f(-0.5,0));
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            Player.move(sf::Vector2f(0.5,0));
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+            Player.move(sf::Vector2f(0,-0.5));
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+            Player.move(sf::Vector2f(0,0.5));
+        };
+
+        // check for collision
+        gameWorld.checkCollision(Player);
+
+        // clears window
+        window.clear();
+
+        // draw all the tiles onto the window
+        for(int i = 0; i < gameWorld.gridLength; i++){
+            for(int j = 0; j < gameWorld.gridLength; j++){
+                window.draw(gameWorld.tiles[i][j]->sprite);
+            };
+        };        
+        
+        //draws player then the window
+        window.draw(Player);
+        window.display();
+    };
+
+    return 0;
+};
+
+
+
+Welcome to the farming game of the century! 
+Immerse yourself in the world of agriculture- 
+as you grow your garden. Plant a variety of crops,
+nurture them with water and care, and witness 
+the rewards of your labor.
+
+
+Thanks for 
+the playing!

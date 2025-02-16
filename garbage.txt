@@ -1,0 +1,44 @@
+/*
+    window.draw(testSprite);
+*/
+    
+
+/*
+    bool GameTile::setUpSprite(std::string textureName){
+        if(!texture.loadFromFile("Assets//Finished Files//Grass_Block.png")){
+        std::cout << "Could not load grass texture." << std::endl;
+        return 0;
+
+        sf::Sprite grassSprite;
+        grassSprite.setTexture(texture);
+        };
+    };
+*/
+
+
+
+
+
+ // if key pressed, do accordingly
+            if(event.type == sf::Event::KeyPressed){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+                    Player.move(sf::Vector2f(-50,0));
+                }
+            
+            else if(event.type == sf::Event::KeyPressed){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+                    Player.move(sf::Vector2f(50,0));
+                }
+            }
+            else if(event.type == sf::Event::KeyPressed){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+                    Player.move(sf::Vector2f(0,50));
+                }
+            }
+            else if(event.type == sf::Event::KeyPressed){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+                    Player.move(sf::Vector2f(0,-50));
+                };
+            };
+        };
+

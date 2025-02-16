@@ -1,0 +1,39 @@
+done:
+build map
+movement
+game main menu
+water hole
+	- collide to refill water
+
+menu for store:
+	- buy seeds
+	- see price
+	- show reward for harvest
+
+changelogs
+
+to be done:
+collision system + user interaction
+	garden bed
+		- choose what to plant
+		- is ready to harvest?
+			- if ready, harvest
+
+	menu for store
+		- show time 
+		- show current money
+
+kill switch
+
+bool
+	becomes true when code block is executed for the first time (ontop of something)
+	have itso that the codew block has another condition, if true dont run
+	once you move off, set bool back to false 
+
+	bool, when touch tile and execute code, keep value as true and only set to false when you're on grass
+
+	look into using a getter to find if the players value is changing or not, if changing then it is a problem with the sprite, if not changing then its a problem with the setter
+
+
+game ending
+

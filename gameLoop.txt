@@ -1,0 +1,238 @@
+// conditionally execute
+                    switch (x){
+                        // while case 0, run the play mode
+                        case 0:
+                            while(Play.isOpen()){
+                                Event playEvent;
+                                while(Play.pollEvent(playEvent)){
+                                    if(playEvent.type == Event::Closed){
+                                        Play.close();
+                                    };
+
+                                    // clears window
+                                    Play.clear();
+                                    
+                                    if (playEvent.type == sf::Event::KeyPressed) {
+                                        switch (playEvent.key.code) {
+                                            case sf::Keyboard::Left:
+                                                Player.move(sf::Vector2f(-5, 0));
+                                                break;
+
+                                            case sf::Keyboard::Right:
+                                                Player.move(sf::Vector2f(5, 0));
+                                                break;
+
+                                            case sf::Keyboard::Up:
+                                                Player.move(sf::Vector2f(0, -5));
+                                                break;
+
+                                            case sf::Keyboard::Down:
+                                                Player.move(sf::Vector2f(0, 5));
+                                                break;
+
+                                            case sf::Keyboard::Escape:
+                                                Play.close();
+                                                break;
+
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    
+                                    // if on store location, close play mode and return to menu
+                                    if((Player.getPosition().x > 250 && Player.getPosition().x < 300) && (Player.getPosition().y > 100 && Player.getPosition().y < 150)){
+                                        Player.setPosition(Player.getPosition().x + 50, Player.getPosition().y + 50);
+                                        Play.close();
+                                        gameMenu.setPressedItem(3);
+                                    };
+
+                                    // check for collision
+                                    gameWorld.checkCollision(Player, Waterhole, Garden);
+                                
+                                    // if they choose to leave the game
+                                    if(playEvent.type == Event::KeyPressed){
+                                        if (playEvent.key.code == Keyboard::Escape){
+                                            Play.close();
+                                        }
+                                    }
+                                };
+                                    // close other modes and draw all tiles
+                                    About.close();
+                                    Exit.close();
+                                    GardenBedMenu.close();
+                                    StoreMenu.close();
+                                    Play.clear();
+                                    // draw all the tiles onto the window
+                                        for(int i = 0; i < gameWorld.gridLength; i++){
+                                            for(int j = 0; j < gameWorld.gridLength; j++){
+                                                Play.draw(gameWorld.tiles[i][j]->sprite);
+                                            };
+                                        };  
+                                    Play.draw(Player);
+                                    Play.display();
+                            };
+
+                        // case 1 is when the about mode is running
+                        case 1:
+                            while(About.isOpen()){
+                                Event aboutEvent;
+                                while(About.pollEvent(aboutEvent)){
+                                    if(aboutEvent.type == Event::Closed){
+                                        About.close();
+                                    };
+
+                                    if(aboutEvent.type == Event::KeyPressed){
+                                        if (aboutEvent.key.code == Keyboard::Escape){
+                                            About.close();
+                                        };
+                                    };
+                                };
+                                Play.close();
+                                Exit.close();
+                                GardenBedMenu.close();
+                                StoreMenu.close();
+                                About.clear();
+                                About.draw(aboutBackground);
+                                About.display();
+                            };
+
+                        // exit mode
+                        case 2:
+                            while(Exit.isOpen()){
+                            Event exitEvent;
+                            while(Exit.pollEvent(exitEvent)){
+                                if(exitEvent.type == Event::Closed){
+                                    Exit.close();
+                                }
+                                if(exitEvent.type == Event::KeyPressed){
+                                    if (exitEvent.key.code == Keyboard::Escape){
+                                        Exit.close();
+                                    };
+                                };
+                            };
+                                About.close();
+                                Play.close();
+                                GardenBedMenu.close();
+                                StoreMenu.close();
+                                Exit.clear();
+                                Exit.draw(exitBackground);
+                                Exit.display();
+                                window.close();
+                        };
+
+                        // store mode
+                        case 3:
+                            while(StoreMenu.isOpen()){
+                            Event storeMenuEvent;
+                            while(StoreMenu.pollEvent(storeMenuEvent)){
+                                if(storeMenuEvent.type == Event::Closed){
+                                    StoreMenu.close();
+                                }
+                                // check user key inputs
+                                if(storeMenuEvent.type == Event::KeyPressed){
+                                    if (storeMenuEvent.key.code == Keyboard::Escape){
+                                        StoreMenu.close();
+                                    }
+                                    else if (storeMenuEvent.key.code == Keyboard::Up){
+                                        storeMenu.MoveUp();
+                                    }
+                                    else if (storeMenuEvent.key.code == Keyboard::Down){
+                                        storeMenu.MoveDown();
+                                    }
+                                    // execute user choice
+                                    else if (storeMenuEvent.key.code == Keyboard::Return){
+                                        int selectedStoreMenuOption = storeMenu.getPressedItem();
+                                        switch(selectedStoreMenuOption){
+                                            case 0:
+                                                store.BuyThisItem(1);
+                                                    
+                                            case 1:
+                                                store.BuyThisItem(2);
+                                            
+                                            case 2:
+                                                store.BuyThisItem(3);
+                                            
+                                            case 3:
+                                                store.BuyThisItem(4);
+
+                                            case 4:
+                                                store.BuyThisItem(5);
+                                        };                                        
+                                    };  
+                                };
+                            };
+                                About.close();
+                                Play.close();
+                                GardenBedMenu.close();
+                                Exit.close();
+
+                                StoreMenu.clear();
+                                StoreMenu.draw(storeMenuBackground);
+                                storeMenu.draw(StoreMenu);
+                                StoreMenu.display();
+                        };
+
+                        // gardenbed mode
+                        case 4:
+                            while(GardenBedMenu.isOpen()){
+                            Event GardenBedMenuEvent;
+                            while(GardenBedMenu.pollEvent(GardenBedMenuEvent)){
+                                if(GardenBedMenuEvent.type == Event::Closed){
+                                    GardenBedMenu.close();
+                                }
+                                if(GardenBedMenuEvent.type == Event::KeyPressed){
+                                    if (GardenBedMenuEvent.key.code == Keyboard::Escape){
+                                        GardenBedMenu.close();
+                                    }
+                                    if (GardenBedMenuEvent.key.code == Keyboard::Up){
+                                        gardenMenu.MoveUp();
+                                    }
+                                    if (GardenBedMenuEvent.key.code == Keyboard::Down){
+                                        gardenMenu.MoveDown();
+                                    }
+                                    if (GardenBedMenuEvent.key.code == Keyboard::Return){
+                                        
+                                        int selectedIndexItem = gardenMenu.getPressedItem();
+                                        switch(selectedIndexItem){
+
+                                            case 1:
+                                                Garden.AddCropToGardenBed(BeetrootCrop);
+
+                                            case 2:
+                                                Garden.AddCropToGardenBed(CarrotCrop);
+                                            
+                                            case 3:
+                                                Garden.AddCropToGardenBed(RadishCrop);
+
+                                            case 4:
+                                                Garden.AddCropToGardenBed(RiceCrop);
+                                            
+                                            case 5:
+                                                BeetrootSeed->CropFinishedGrowing();
+                                                CarrotSeed->CropFinishedGrowing();
+                                                RadishSeed->CropFinishedGrowing();
+                                                RiceSeed->CropFinishedGrowing();
+                                            
+                                            case 6:
+                                                Garden.SetShoveled(true);
+                                        };
+                                        
+                                        GardenBedMenu.close();
+                                    };
+                                };
+                            };
+                                About.close();
+                                Play.close();
+                                Exit.close();
+                                StoreMenu.close();
+
+                                GardenBedMenu.clear();
+                                GardenBedMenu.draw(storeMenuBackground);
+                                gardenMenu.draw(GardenBedMenu);
+                                GardenBedMenu.display();
+                        };
+                        
+                        // default case
+                        default:
+                            break;
+                    };

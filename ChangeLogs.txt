@@ -1,0 +1,13 @@
+Added:
+(20/5/2023) Item File 
+	- The item file was added in order to as it wasn't logical for the seed class type to inherit from the store class type. In order for the seed class to work a store class type would have been needed to be initalised within the seed class before being able to use said class. This was deemed as unreasonable. Hence, the item file in order to change this.	
+
+Changed:
+(20/5/2023) Seed and Crop Files now inherit via a public mode of inheritance from the item class rather than the store class. (Refer to ItemFile in Added:) 
+
+
+(22/5/2023) Shovel File
+	- The shovel file was added to be used purely on the garden beds and utilised as a method of further engaging the user as well as allowing there to be a system in which the user must first "shovel" the garden beds before being allowed to build them.
+
+(24/5/2023) Win File
+	- The win file was added as a lack of game ending was noticed in the game plan and the game would have felt incomplete without it.

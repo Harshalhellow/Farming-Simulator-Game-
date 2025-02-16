@@ -1,0 +1,29 @@
+Sprites and Textures
+    Create a texture (i.e., sf::Texture "texture variable name whatever you choose it to be")
+        Make sure you provide have the right file path
+    Create the sprite    
+        Set texture to sprite
+        Set size
+    Sprites and textures must be drawn within while window loop
+        Wipe the window, draw sprite, display window
+
+**Difference between a sprite and a texture::
+    A texture is an image but has the specific role of being mapped to a 2D entity.
+    A sprite is nothing more than a textured rectangle. 
+
+Game Tiles
+    To setup game tiles, a header folder and a cpp file is made.
+    Header File:
+        Game tiles include the position, the textures, the sprites, the tile constructor itself,
+            and a boolean to setup the sprite (attach a texture to the sprite).
+    Cpp File:
+        Initialise constructor with all attributes
+        Set position
+
+
+Game World
+    Basically initalising the definitions for all the tiles really
+
+Game Map
+    Build the map as a 2D list of game tiles
+    
